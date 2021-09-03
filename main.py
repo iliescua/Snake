@@ -66,5 +66,4 @@ def new_game():
 if not start_game():
     screen.onkey(new_game, "space")
 
-
 screen.exitonclick()
