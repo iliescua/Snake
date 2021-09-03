@@ -18,6 +18,7 @@ screen.tracer(0)
 
 
 def start_game():
+    screen.reset()
     is_game_on = True
     snake = Snake()
     food = Food()
@@ -28,6 +29,7 @@ def start_game():
     screen.onkeypress(snake.down, "Down")
     screen.onkeypress(snake.left, "Left")
     screen.onkeypress(snake.right, "Right")
+    screen.onkeypress(None, "space")
 
     while is_game_on:
         screen.update()
@@ -54,16 +56,10 @@ def start_game():
             if snake.head.distance(seg) < 10:
                 is_game_on = False
                 sb.game_over()
-    
-    return False
+
+    screen.onkeypress(start_game, "space")
 
 
-def new_game():
-    screen.reset()
-    start_game()
-
-
-if not start_game():
-    screen.onkey(new_game, "space")
+start_game()
 
 screen.exitonclick()
