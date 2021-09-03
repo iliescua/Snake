@@ -42,6 +42,13 @@ class Snake:
         self.head.forward(MOVE_DISTANCE)
 
 
+    def border_collision(self):
+        if self.head.heading() == RIGHT or self.head.heading() == LEFT:
+            self.head.goto(-self.head.xcor(), self.head.ycor())
+        elif self.head.heading() == UP or self.head.heading() == DOWN:
+            self.head.goto(self.head.xcor(), -self.head.ycor())
+
+
     def up(self):
         if self.head.heading() != DOWN:
             self.head.setheading(UP)

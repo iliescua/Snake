@@ -1,4 +1,4 @@
-from turtle import Screen
+from turtle import Screen, st
 from snake import Snake
 from food import Food
 from scoreboard import Scoreboard
@@ -16,43 +16,55 @@ screen.setup(WIDTH, HEIGHT)
 screen.bgcolor("black")
 screen.tracer(0)
 
-is_game_on = True
-snake = Snake()
-food = Food()
-sb = Scoreboard()
 
-screen.listen()
-screen.onkeypress(snake.up, "Up")
-screen.onkeypress(snake.down, "Down")
-screen.onkeypress(snake.left, "Left")
-screen.onkeypress(snake.right, "Right")
+def start_game():
+    is_game_on = True
+    snake = Snake()
+    food = Food()
+    sb = Scoreboard()
 
-while is_game_on:
-    screen.update()
-    time.sleep(SLEEP_TIME)
-    snake.move()
+    screen.listen()
+    screen.onkeypress(snake.up, "Up")
+    screen.onkeypress(snake.down, "Down")
+    screen.onkeypress(snake.left, "Left")
+    screen.onkeypress(snake.right, "Right")
 
-    #Detect collision with food
-    if snake.head.distance(food) < HIT_DISTANCE:
-        food.refresh()
-        sb.updateScore()
-        snake.extend()
+    while is_game_on:
+        screen.update()
+        time.sleep(SLEEP_TIME)
+        snake.move()
+
+        # Detect collision with food
+        if snake.head.distance(food) < HIT_DISTANCE:
+            food.refresh()
+            sb.updateScore()
+            snake.extend()
+        
+        # Detect collision with border
+        check_pos_x = snake.head.xcor() > MAP_END
+        check_neg_x = snake.head.xcor() < -MAP_END
+        check_pos_y = snake.head.ycor() > MAP_END
+        check_neg_y = snake.head.ycor() < -MAP_END
+        
+        if check_pos_x or check_neg_x or check_pos_y or check_neg_y:
+            snake.border_collision()
+
+        # Detect collision with tail
+        for seg in snake.segments[1:]:
+            if snake.head.distance(seg) < 10:
+                is_game_on = False
+                sb.game_over()
     
-    #Detect collision with tail
-    check_pos_x = snake.head.xcor() > MAP_END
-    check_neg_x = snake.head.xcor() < -MAP_END
-    check_pos_y = snake.head.ycor() > MAP_END
-    check_neg_y = snake.head.ycor() < -MAP_END
-
-    if check_pos_x or check_neg_x or check_pos_y or check_neg_y:
-        is_game_on = False
-        sb.game_over()
+    return False
 
 
-    #Detect collision with tail
-    for seg in snake.segments[1:]:
-        if snake.head.distance(seg) < 10:
-            is_game_on = False
-            sb.game_over()
+def new_game():
+    screen.reset()
+    start_game()
+
+
+if not start_game():
+    screen.onkey(new_game, "space")
+
 
 screen.exitonclick()
