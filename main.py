@@ -41,13 +41,13 @@ def start_game():
             food.refresh()
             sb.updateScore()
             snake.extend()
-        
+
         # Detect collision with border
         check_pos_x = snake.head.xcor() > MAP_END
         check_neg_x = snake.head.xcor() < -MAP_END
         check_pos_y = snake.head.ycor() > MAP_END
         check_neg_y = snake.head.ycor() < -MAP_END
-        
+
         if check_pos_x or check_neg_x or check_pos_y or check_neg_y:
             snake.border_collision()
 
@@ -55,6 +55,7 @@ def start_game():
         for seg in snake.segments[1:]:
             if snake.head.distance(seg) < 10:
                 is_game_on = False
+                sb.set_high_score()
                 sb.game_over()
 
     screen.onkeypress(start_game, "space")
