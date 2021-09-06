@@ -3,6 +3,7 @@
 ## How to play
 Use the arrow keys to control the snake and have it move around the screen. If the game ends then you can quickly restart it using the spacebar.
 
+
 ### v1.0
 This was my first attempt at recreating the classic snake game from scratch. I used the turtles libraray to create the screen that the game is played on as well 
 as the components that are used in the snake game such as the food and the scoreboard. From there I made the snake move across the screen and respond to keyboard 
