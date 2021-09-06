@@ -9,3 +9,7 @@ inputs (arrow keys to move) and I implemented detection checks to ensure the gam
 ## v1.1
 Changed the way the game can end, so now when it's over it looks for the user to hit space to restart the game. Also, added the functionality so that now when the 
 snake collides with a border it will continue from the other side as if it had wrapped around instead of ending the game.
+
+
+## v1.2
+Added persistance to the game by keeping track of the highest score that a player achieved using files to store the data.
