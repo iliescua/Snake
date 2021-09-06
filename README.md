@@ -1,7 +1,7 @@
 # Snake
 
 ## How to play
-Use the arrow keys to control the snake and have it move around the screen. If the game ends then you can quickly restart it using the spacebar.
+Use the arrow keys to control the snake and have it move around the screen. If the game ends then you can quickly restart it by using the spacebar.
 
 
 ### v1.0
